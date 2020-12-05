@@ -1,0 +1,3 @@
+[submodule "external/stde"]
+	path = external/stde
+	url = https://github.com/M4xi1m3/std-extended.git
