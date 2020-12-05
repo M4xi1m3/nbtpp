@@ -6,7 +6,7 @@
 namespace nbtpp::tags {
     class tag_end: public tag {
     public:
-        tag_end() : tag("", type::TAG_End) {
+        tag_end() : tag("", tag_type::TAG_End) {
         }
         virtual ~tag_end() {
         }

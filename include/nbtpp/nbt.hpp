@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "tag.hpp"
+#include "stde/streams/data.hpp"
 
 namespace nbtpp {
 
@@ -73,7 +74,7 @@ namespace nbtpp {
 
     private:
         void debug(const tag* data, int indent);
-        tag* load_internal(std::istream& in);
+        tag* load_internal(stde::streams::data_istream& di, tag_type force_type = tag_type::TAG_Undef);
 
         tag *m_tag;
         bool m_compressed = false;

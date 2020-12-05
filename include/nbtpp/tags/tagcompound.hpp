@@ -8,21 +8,52 @@
 namespace nbtpp::tags {
     class tag_compound: public tag {
     public:
-        tag_compound(std::string name) : tag(name, type::TAG_Compound) {
+        tag_compound(std::string name) : tag(name, tag_type::TAG_Compound) {
 
         }
 
         virtual ~tag_compound() {
-            for(tag* t : m_content) {
+            for (tag *t : m_content) {
                 delete t;
             }
         }
 
         void insert(tag* t) {
+            for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                if ((*i)->getName() == t->getName()) {
+                    m_content.erase(i);
+                    break;
+                }
+            }
+
             m_content.push_back(t);
         }
 
-        inline const std::vector<tag*>& getContent() const {
+        tag* get(std::string name) const {
+            for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                if ((*i)->getName() == name) {
+                    return *i;
+                }
+            }
+
+            return nullptr;
+        }
+
+        bool exists(std::string name) const {
+            for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                if ((*i)->getName() == name) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        tag* operator[](const std::string& name) const {
+            return get(name);
+        }
+
+        inline const std::vector<tag*>& value() const {
             return m_content;
         }
     private:

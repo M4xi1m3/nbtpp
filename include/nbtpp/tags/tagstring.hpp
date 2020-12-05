@@ -6,17 +6,17 @@
 namespace nbtpp::tags {
     class tag_string: public tag {
     public:
-        tag_string(std::string name, std::string value) : tag(name, type::TAG_String), m_value(value) {
+        tag_string(std::string name, std::string value) : tag(name, tag_type::TAG_String), m_value(value) {
         }
 
         virtual ~tag_string() {
         }
 
-        inline const std::string& getValue() const {
+        inline const std::string& value() const {
             return m_value;
         }
 
-        void setMalue(const std::string& mValue) {
+        void value(const std::string& mValue) {
             m_value = mValue;
         }
 

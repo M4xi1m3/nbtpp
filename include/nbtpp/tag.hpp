@@ -8,7 +8,7 @@
 namespace nbtpp {
     class nbt;
 
-    enum type : uint8_t {
+    enum tag_type : uint8_t {
         TAG_End = 0,
         TAG_Byte = 1,
         TAG_Short = 2,
@@ -41,21 +41,31 @@ namespace nbtpp {
             m_name = name;
         }
 
-        type getType() const {
+        tag_type getType() const {
             return m_type;
         }
     protected:
-        tag(const std::string& name, type type) : m_name(name), m_type(type) {
+        tag(const std::string& name, tag_type type) : m_name(name), m_type(type) {
         }
     private:
         std::string m_name;
-        type m_type;
+        tag_type m_type;
     };
 
 } /* namespace nbtpp */
 
 #include "tags/tagend.hpp"
+#include "tags/tagbyte.hpp"
+#include "tags/tagshort.hpp"
+#include "tags/tagint.hpp"
+#include "tags/taglong.hpp"
+#include "tags/tagfloat.hpp"
+#include "tags/tagdouble.hpp"
+#include "tags/tagbytearray.hpp"
 #include "tags/tagstring.hpp"
+#include "tags/taglist.hpp"
 #include "tags/tagcompound.hpp"
+#include "tags/tagintarray.hpp"
+#include "tags/taglongarray.hpp"
 
 #endif /* TAG_HPP_ */
