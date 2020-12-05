@@ -29,14 +29,14 @@ void nbt::load(std::ifstream& in) {
     try {
         streams::gzip_istream g(in);
 
-        m_compressed = true;
         load((std::istream&) g);
+
+        m_compression = g.type() == streams::gzip_streambuf::zlib ? zlib : gzip;
 
     } catch (streams::gzip_exception &e) {
         in.clear();
         in.seekg(pos);
 
-        m_compressed = false;
         load((std::istream&) in);
     }
 }
@@ -51,9 +51,8 @@ void nbt::load(std::istream& in) {
     di.exceptions(std::ios_base::badbit);
 
     m_tag = load_internal(di);
+    m_compression = uncompressed;
 }
-
-#include <iostream>
 
 tag* nbt::load_internal(streams::data_istream& di, tag_type force_type) {
     tag_type type = force_type;
@@ -62,12 +61,9 @@ tag* nbt::load_internal(streams::data_istream& di, tag_type force_type) {
     if (type == tag_type::TAG_Undef) {
         type = (tag_type) di.readUnsignedByte();
 
-        std::cout << type << std::endl;
-
         if (type == tag_type::TAG_End)
             return new tags::tag_end();
         tag_name = di.readUTF();
-        std::cout << tag_name << std::endl;
     }
 
     switch (type) {

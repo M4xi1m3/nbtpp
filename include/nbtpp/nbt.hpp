@@ -13,6 +13,10 @@ namespace nbtpp {
     class nbt {
 
     public:
+        enum compression : uint8_t {
+            gzip = 1, zlib = 2, uncompressed = 3
+        };
+
         /**
          * Create a blank NBT.
          */
@@ -43,7 +47,7 @@ namespace nbtpp {
         void load(std::ifstream& in);
 
         /**
-         * Loads uncompressed data from a stream and sets the compressed flag to false.
+         * Loads uncompressed data from a stream
          * @param in    Stream to load from.
          */
         void load(std::istream& in);
@@ -57,19 +61,20 @@ namespace nbtpp {
         void debug();
 
         /**
-         * Check if NBT was read / should be written compressed
-         * @return  true if compressed, false otherwise
+         * Get the compression method used for the NBT data
+         * @return
          */
-        bool isCompressed() const {
-            return m_compressed;
+        inline compression getCompressionMethod() const {
+            return m_compression;
         }
 
         /**
-         * Set the NBT to be written compressed.
-         * @param compressed
+         * Set the NBT compression method
+         *
+         * @param type
          */
-        void setCompressed(bool compressed = false) {
-            m_compressed = compressed;
+        void setCompressionMethod(compression type = uncompressed) {
+            m_compression = type;
         }
 
     private:
@@ -77,7 +82,7 @@ namespace nbtpp {
         tag* load_internal(stde::streams::data_istream& di, tag_type force_type = tag_type::TAG_Undef);
 
         tag *m_tag;
-        bool m_compressed = false;
+        compression m_compression = uncompressed;
     };
 
 } /* namespace nbtpp */

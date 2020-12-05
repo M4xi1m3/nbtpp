@@ -10,7 +10,11 @@ using namespace nbtpp;
 using namespace stde;
 
 int main(int argc, char** argv) {
-    std::ifstream f("tests/issue_13.dat");
+    // std::ifstream f("tests/hell.mcr");
+    // f.seekg(0x2005);
+
+    std::ifstream f("tests/hello_world.nbt");
     nbtpp::nbt n(f);
     n.debug();
+    std::cout << +n.getCompressionMethod() << std::endl;
 }
