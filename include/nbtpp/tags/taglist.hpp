@@ -3,14 +3,19 @@
 
 #include <vector>
 
+#include "../nbt.hpp"
 #include "../tag.hpp"
 #include "../nbtexception.hpp"
+
+namespace nbtpp {
+    std::string name_for_type(tag_type t);
+}
 
 namespace nbtpp::tags {
 
     class tag_list: public tag {
     public:
-        tag_list(std::string name, tag_type type) : tag(name, tag_type::TAG_List), m_type(type) {
+        tag_list(std::string name, tag_type type) : tag(name, tag_type::TAG_List), m_content_type(type) {
 
         }
 
@@ -20,13 +25,13 @@ namespace nbtpp::tags {
             }
         }
 
-        tag_type type() {
-            return m_type;
+        inline tag_type content_type() const {
+            return m_content_type;
         }
 
         void append(tag* t) {
-            if (t->getType() != m_type) {
-                throw nbt_exception("can't put type " + std::to_string(t->getType()) + " in list of " + std::to_string(m_type));
+            if (t->type() != m_content_type) {
+                throw nbt_exception("can't put type " + nbtpp::name_for_type(t->type()) + " in list of " + nbtpp::name_for_type(m_content_type));
             }
             m_content.push_back(t);
         }
@@ -36,7 +41,7 @@ namespace nbtpp::tags {
         }
 
     private:
-        tag_type m_type;
+        tag_type m_content_type;
         std::vector<tag*> m_content;
     };
 

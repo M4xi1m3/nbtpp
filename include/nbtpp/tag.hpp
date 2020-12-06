@@ -25,23 +25,26 @@ namespace nbtpp {
         TAG_Undef = 0xff
     };
 
+    /**
+     * NBT tag base.
+     *
+     * This class has no public constructor, use tag_* classes instead.
+     */
     class tag {
         friend class nbt;
     public:
-        tag() : m_name(), m_type(TAG_Undef) {
-        }
         virtual ~tag() {
         }
 
-        std::string getName() const {
+        std::string name() const {
             return m_name;
         }
 
-        void setName(const std::string& name) {
+        void name(const std::string& name) {
             m_name = name;
         }
 
-        tag_type getType() const {
+        tag_type type() const {
             return m_type;
         }
     protected:

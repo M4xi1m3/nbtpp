@@ -20,7 +20,7 @@ namespace nbtpp::tags {
 
         void insert(tag* t) {
             for (auto i = m_content.begin(); i < m_content.end(); i++) {
-                if ((*i)->getName() == t->getName()) {
+                if ((*i)->name() == t->name()) {
                     m_content.erase(i);
                     break;
                 }
@@ -31,7 +31,7 @@ namespace nbtpp::tags {
 
         tag* get(std::string name) const {
             for (auto i = m_content.begin(); i < m_content.end(); i++) {
-                if ((*i)->getName() == name) {
+                if ((*i)->name() == name) {
                     return *i;
                 }
             }
@@ -41,7 +41,7 @@ namespace nbtpp::tags {
 
         bool exists(std::string name) const {
             for (auto i = m_content.begin(); i < m_content.end(); i++) {
-                if ((*i)->getName() == name) {
+                if ((*i)->name() == name) {
                     return true;
                 }
             }

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "tag.hpp"
-#include "stde/streams/data.hpp"
 
 namespace nbtpp {
 
@@ -31,7 +30,7 @@ namespace nbtpp {
 
         /**
          * Loads uncompressed data from a stream and sets the compressed flag to false.
-         * @param in    Stream to load from.
+         * @param in    Stream to load from
          */
         nbt(std::istream& in);
 
@@ -44,21 +43,49 @@ namespace nbtpp {
          * Loads NBT data from a file, detecting its compression (gzip'd or uncompressed) and setting the compressed flag accordingly.
          * @param in    File to load from
          */
-        void load(std::ifstream& in);
+        void load_file(std::ifstream& in);
 
         /**
          * Loads uncompressed data from a stream
-         * @param in    Stream to load from.
+         * @param in    Stream to load from
          */
         void load(std::istream& in);
 
+        /**
+         * Saves NBT to a file, using compression
+         * @param out   File to save to
+         */
+        void save_file(std::ofstream& out);
+
+        /**
+         * Saves uncompressed data to a stream
+         * @param out   Stream to save to
+         */
         void save(std::ostream& out);
 
+        /**
+         * Retrieve the tag
+         * @return
+         */
         inline tag* getTag() const {
             return m_tag;
         }
 
-        void debug();
+        /**
+         * Set a new tag, delete the old one.
+         * @param t
+         */
+        void setTag(tag* t) {
+            if (m_tag != nullptr) {
+                delete m_tag;
+            }
+            m_tag = t;
+        }
+
+        /**
+         * Pretty prints a NBT tag to out
+         */
+        void debug(std::ostream& out = std::cout);
 
         /**
          * Get the compression method used for the NBT data
@@ -76,14 +103,17 @@ namespace nbtpp {
         void setCompressionMethod(compression type = uncompressed) {
             m_compression = type;
         }
-
     private:
-        void debug(const tag* data, int indent);
-        tag* load_internal(stde::streams::data_istream& di, tag_type force_type = tag_type::TAG_Undef);
-
         tag *m_tag;
         compression m_compression = uncompressed;
     };
+
+    /**
+     * Get name corresponding to type t
+     * @param t Type to get name of
+     * @return  Name of the type
+     */
+    std::string name_for_type(tag_type t);
 
 } /* namespace nbtpp */
 
