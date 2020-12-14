@@ -67,7 +67,7 @@ namespace nbtpp {
          * Retrieve the tag
          * @return
          */
-        inline tag* getTag() const {
+        inline tag* content() const {
             return m_tag;
         }
 
@@ -75,7 +75,7 @@ namespace nbtpp {
          * Set a new tag, delete the old one.
          * @param t
          */
-        void setTag(tag* t) {
+        void content(tag* t) {
             if (m_tag != nullptr) {
                 delete m_tag;
             }
@@ -91,7 +91,7 @@ namespace nbtpp {
          * Get the compression method used for the NBT data
          * @return
          */
-        inline compression getCompressionMethod() const {
+        inline compression compression_method() const {
             return m_compression;
         }
 
@@ -100,7 +100,7 @@ namespace nbtpp {
          *
          * @param type
          */
-        void setCompressionMethod(compression type = uncompressed) {
+        void compression_method(compression type = uncompressed) {
             m_compression = type;
         }
     private:
