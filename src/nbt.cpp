@@ -189,7 +189,13 @@ std::string nbtpp::name_for_type(tag_type t) {
 }
 
 static void debug_internal(std::ostream& out, const tag* data, int indent, bool unnamed) {
+
     std::string ind(indent * 2, ' ');
+
+    if (data == nullptr) {
+        std::cout << ind << "<nullptr>\n";
+        return;
+    }
 
     out << ind << name_for_type(data->type());
     if (unnamed)
