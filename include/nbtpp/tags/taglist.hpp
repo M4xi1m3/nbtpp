@@ -29,6 +29,21 @@ namespace nbtpp::tags {
             return m_content_type;
         }
 
+        bool remove(tag* t) {
+            for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                if ((*i) == t) {
+                    m_content.erase(i);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        tag* get(int position) {
+            return m_content.at(position);
+        }
+
         void append(tag* t) {
             if (t->type() != m_content_type) {
                 throw nbt_exception("can't put type " + nbtpp::name_for_type(t->type()) + " in list of " + nbtpp::name_for_type(m_content_type));

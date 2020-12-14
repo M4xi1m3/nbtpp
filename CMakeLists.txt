@@ -4,9 +4,6 @@ project(nbtpp)
 # Grab all sources
 file(GLOB SOURCES "src/*.cpp" "src/*/*.cpp")
 
-# Grab all headers
-file(GLOB INCLUDES "src/*.hpp" "src/*/*.hpp")
-
 # Use standard install dirs
 include(GNUInstallDirs)
 

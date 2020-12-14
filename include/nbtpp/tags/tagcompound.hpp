@@ -29,6 +29,17 @@ namespace nbtpp::tags {
             m_content.push_back(t);
         }
 
+        bool remove(tag* t) {
+            for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                if ((*i) == t) {
+                    m_content.erase(i);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         tag* get(std::string name) const {
             for (auto i = m_content.begin(); i < m_content.end(); i++) {
                 if ((*i)->name() == name) {
