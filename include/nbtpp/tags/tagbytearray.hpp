@@ -4,29 +4,30 @@
 #include "../tag.hpp"
 #include <vector>
 
-namespace nbtpp::tags {
+namespace nbtpp {
+    namespace tags {
 
-    class tag_bytearray: public tag {
-    public:
-        tag_bytearray(std::string name) : tag(name, tag_type::TAG_Byte_Array), m_value() {
+        class tag_bytearray: public tag {
+        public:
+            tag_bytearray(std::string name) : tag(name, tag_type::TAG_Byte_Array), m_value() {
 
-        }
+            }
 
-        virtual ~tag_bytearray() {
+            virtual ~tag_bytearray() {
 
-        }
+            }
 
-        void append(int8_t val) {
-            m_value.push_back(val);
-        }
+            void append(int8_t val) {
+                m_value.push_back(val);
+            }
 
-        inline const std::vector<int8_t>& value() const {
-            return m_value;
-        }
-    private:
-        std::vector<int8_t> m_value;
-    };
+            inline const std::vector<int8_t>& value() const {
+                return m_value;
+            }
+        private:
+            std::vector<int8_t> m_value;
+        };
+    }
+}
 
-} /* namespace tags::nbtpp */
-
-#endif /* NBTPP_TAGS_TAGBYTEARRAY_HPP_ */
+#endif

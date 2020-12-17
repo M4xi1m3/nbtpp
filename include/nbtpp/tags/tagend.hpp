@@ -3,14 +3,16 @@
 
 #include "../tag.hpp"
 
-namespace nbtpp::tags {
-    class tag_end: public tag {
-    public:
-        tag_end() : tag("", tag_type::TAG_End) {
-        }
-        virtual ~tag_end() {
-        }
-    };
-} /* namespace nbtpp::tags */
+namespace nbtpp {
+    namespace tags {
+        class tag_end: public tag {
+        public:
+            tag_end() : tag("", tag_type::TAG_End) {
+            }
+            virtual ~tag_end() {
+            }
+        };
+    }
+}
 
-#endif /* TAGS_END_HPP_ */
+#endif

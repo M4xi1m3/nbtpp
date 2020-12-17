@@ -55,7 +55,7 @@ namespace nbtpp {
         tag_type m_type;
     };
 
-} /* namespace nbtpp */
+}
 
 #include "tags/tagend.hpp"
 #include "tags/tagbyte.hpp"
@@ -71,4 +71,4 @@ namespace nbtpp {
 #include "tags/tagintarray.hpp"
 #include "tags/taglongarray.hpp"
 
-#endif /* TAG_HPP_ */
+#endif

@@ -15,13 +15,14 @@ int main(int argc, char** argv) {
 
     // std::ifstream f("tests/hello_world.nbt");
 
-    std::ifstream f("tests/bigtest.nbt");
+    std::ifstream f("tests/bigtest.nbt", std::ifstream::binary);
 
     nbtpp::nbt n(f);
     n.debug();
-
-    std::ofstream fo("test.nbt");
-    n.save_file(fo);
+    /*
+     std::ofstream fo("test.nbt");
+     n.save_file(fo);
+     */
 
     // std::cout << +n.getCompressionMethod() << std::endl;
 }

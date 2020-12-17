@@ -5,71 +5,73 @@
 
 #include "../tag.hpp"
 
-namespace nbtpp::tags {
-    class tag_compound: public tag {
-    public:
-        tag_compound(std::string name) : tag(name, tag_type::TAG_Compound) {
+namespace nbtpp {
+    namespace tags {
+        class tag_compound: public tag {
+        public:
+            tag_compound(std::string name) : tag(name, tag_type::TAG_Compound) {
 
-        }
-
-        virtual ~tag_compound() {
-            for (tag *t : m_content) {
-                delete t;
             }
-        }
 
-        void insert(tag* t) {
-            for (auto i = m_content.begin(); i < m_content.end(); i++) {
-                if ((*i)->name() == t->name()) {
-                    m_content.erase(i);
-                    break;
+            virtual ~tag_compound() {
+                for (tag *t : m_content) {
+                    delete t;
                 }
             }
 
-            m_content.push_back(t);
-        }
-
-        bool remove(tag* t) {
-            for (auto i = m_content.begin(); i < m_content.end(); i++) {
-                if ((*i) == t) {
-                    m_content.erase(i);
-                    return true;
+            void insert(tag* t) {
+                for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                    if ((*i)->name() == t->name()) {
+                        m_content.erase(i);
+                        break;
+                    }
                 }
+
+                m_content.push_back(t);
             }
 
-            return false;
-        }
-
-        tag* get(std::string name) const {
-            for (auto i = m_content.begin(); i < m_content.end(); i++) {
-                if ((*i)->name() == name) {
-                    return *i;
+            bool remove(tag* t) {
+                for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                    if ((*i) == t) {
+                        m_content.erase(i);
+                        return true;
+                    }
                 }
+
+                return false;
             }
 
-            return nullptr;
-        }
-
-        bool exists(std::string name) const {
-            for (auto i = m_content.begin(); i < m_content.end(); i++) {
-                if ((*i)->name() == name) {
-                    return true;
+            tag* get(std::string name) const {
+                for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                    if ((*i)->name() == name) {
+                        return *i;
+                    }
                 }
+
+                return nullptr;
             }
 
-            return false;
-        }
+            bool exists(std::string name) const {
+                for (auto i = m_content.begin(); i < m_content.end(); i++) {
+                    if ((*i)->name() == name) {
+                        return true;
+                    }
+                }
 
-        tag* operator[](const std::string& name) const {
-            return get(name);
-        }
+                return false;
+            }
 
-        inline const std::vector<tag*>& value() const {
-            return m_content;
-        }
-    private:
-        std::vector<tag*> m_content;
-    };
-} /* namespace nbtpp::tags */
+            tag* operator[](const std::string& name) const {
+                return get(name);
+            }
 
-#endif /* TAGS_COMPOUND_HPP_ */
+            inline const std::vector<tag*>& value() const {
+                return m_content;
+            }
+        private:
+            std::vector<tag*> m_content;
+        };
+    }
+}
+
+#endif

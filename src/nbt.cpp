@@ -317,7 +317,6 @@ static void save_internal(streams::data_ostream& out, const tag* the_tag, tag_ty
         }
     }
 
-
     switch (type) {
         case tag_type::TAG_Byte: {
             const tags::tag_byte *s = static_cast<const tags::tag_byte*>(the_tag);
@@ -366,7 +365,7 @@ static void save_internal(streams::data_ostream& out, const tag* the_tag, tag_ty
             const tags::tag_list *l = static_cast<const tags::tag_list*>(the_tag);
             out.write_ubyte(l->content_type());
             out.write_int(l->value().size());
-            for (const tag* t : l->value()) {
+            for (const tag *t : l->value()) {
                 save_internal(out, t, l->content_type());
             }
 
@@ -374,7 +373,7 @@ static void save_internal(streams::data_ostream& out, const tag* the_tag, tag_ty
         }
         case tag_type::TAG_Compound: {
             const tags::tag_compound *c = static_cast<const tags::tag_compound*>(the_tag);
-            for (const tag* t : c->value()) {
+            for (const tag *t : c->value()) {
                 save_internal(out, t);
             }
             out.write_ubyte(tag_type::TAG_End);

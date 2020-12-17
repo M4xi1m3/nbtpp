@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.16)
 project(nbtpp)
 
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # Grab all sources
 file(GLOB SOURCES "src/*.cpp" "src/*/*.cpp")
 

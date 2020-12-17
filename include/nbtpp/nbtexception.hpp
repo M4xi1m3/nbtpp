@@ -25,4 +25,4 @@ namespace nbtpp {
     };
 }
 
-#endif /* NBTPP_NBTEXCEPTION_HPP_ */
+#endif

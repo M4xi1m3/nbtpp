@@ -115,6 +115,6 @@ namespace nbtpp {
      */
     std::string name_for_type(tag_type t);
 
-} /* namespace nbtpp */
+}
 
-#endif /* NBT_HPP_ */
+#endif
