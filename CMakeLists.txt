@@ -34,20 +34,6 @@ target_include_directories(NBTPP_OBJECTS PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/external/stde/include>
     PRIVATE src)
 
-
-# Add install for shared lib
-install(TARGETS ${PROJECT_NAME} EXPORT nbtppConfig
-    ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})
-
-# Add install for includes
-install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
-
-# Add install for config
-install(EXPORT nbtppConfig DESTINATION share/nbtpp/cmake)
-export(TARGETS ${PROJECT_NAME} FILE nbtppConfig.cmake)
-
 # Add tests executable
 add_executable(nbtpptests example/tests.cpp)
 
