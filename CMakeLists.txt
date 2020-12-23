@@ -21,7 +21,21 @@ add_library(nbtpp SHARED $<TARGET_OBJECTS:NBTPP_OBJECTS>)
 add_library(nbtpp_static STATIC $<TARGET_OBJECTS:NBTPP_OBJECTS>)
 
 # Add stde as a dependency
-add_subdirectory(external/stde)
+if(NOT HAS_STDE)
+    message(WARNING "Downloading stde...")
+    configure_file(CMakeLists.txt.in stde-download/CMakeLists.txt)
+
+    execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/stde-download"
+    )
+    execute_process(COMMAND "${CMAKE_COMMAND}" --build .
+        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/stde-download"
+    )
+
+    add_subdirectory(${CMAKE_SOURCE_DIR}/external/stde)
+
+    set(STDE_HEADERS ${CMAKE_SOURCE_DIR}/external/stde/include)
+endif()
 target_link_libraries(nbtpp stde)
 target_link_libraries(nbtpp_static stde_static)
 
@@ -31,7 +45,7 @@ target_include_directories(NBTPP_OBJECTS PUBLIC
     $<INSTALL_INTERFACE:include>
     PRIVATE src)
 target_include_directories(NBTPP_OBJECTS PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/external/stde/include>
+    ${STDE_HEADERS}
     PRIVATE src)
 
 # Add tests executable
@@ -42,7 +56,7 @@ target_include_directories(nbtpptests PUBLIC
     $<INSTALL_INTERFACE:include>
     PRIVATE example)
 target_include_directories(nbtpptests PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/external/stde/include>
+    ${STDE_HEADERS}
     $<INSTALL_INTERFACE:include>
     PRIVATE example)
 
