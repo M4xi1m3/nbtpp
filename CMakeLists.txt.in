@@ -3,7 +3,7 @@ project(stde-download NONE)
 
 include(ExternalProject)
 ExternalProject_Add(stde-download
-                    SOURCE_DIR ${CMAKE_SOURCE_DIR}/external/stde
+                    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/external/stde
                     URL https://github.com/M4xi1m3/std-extended/archive/master.zip
                     CONFIGURE_COMMAND ""
                     BUILD_COMMAND ""

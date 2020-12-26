@@ -26,15 +26,15 @@ if(NOT HAS_STDE)
     configure_file(CMakeLists.txt.in stde-download/CMakeLists.txt)
 
     execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/stde-download"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/stde-download"
     )
     execute_process(COMMAND "${CMAKE_COMMAND}" --build .
-        WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/stde-download"
+        WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/stde-download"
     )
 
-    add_subdirectory(${CMAKE_SOURCE_DIR}/external/stde)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/external/stde)
 
-    set(STDE_HEADERS ${CMAKE_SOURCE_DIR}/external/stde/include)
+    set(STDE_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/external/stde/include)
 endif()
 target_link_libraries(nbtpp stde)
 target_link_libraries(nbtpp_static stde_static)
