@@ -23,6 +23,12 @@ namespace nbtpp {
         }
 
         /**
+         * Create a NBT with an existing tag.
+         */
+        nbt(tag* t) : m_tag(t) {
+        }
+
+        /**
          * Loads NBT data from a file, detecting its compression (gzip'd or uncompressed) and setting the compressed flag accordingly.
          * @param in    File to load from
          */

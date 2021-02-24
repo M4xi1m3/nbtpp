@@ -13,6 +13,10 @@ namespace nbtpp {
 
             }
 
+            tag_intarray(std::string name, const std::vector<int32_t>& data) : tag(name, tag_type::TAG_Byte_Array), m_value(data) {
+
+            }
+
             virtual ~tag_intarray() {
 
             }
@@ -23,6 +27,10 @@ namespace nbtpp {
 
             inline const std::vector<int32_t>& value() const {
                 return m_value;
+            }
+
+            inline void assign(int32_t* array, size_t count) {
+                m_value.assign(array, array + count);
             }
         private:
             std::vector<int32_t> m_value;
