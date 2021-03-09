@@ -43,6 +43,7 @@ namespace nbtpp {
 
             template<class T>
             T* get(int position) const {
+                static_assert(std::is_base_of<nbtpp::tag, T>::value, "T must be child class of nbtpp::tag");
                 return dynamic_cast<T*>(get(position));
             }
 
