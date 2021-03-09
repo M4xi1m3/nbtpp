@@ -41,7 +41,12 @@ namespace nbtpp {
                 return false;
             }
 
-            tag* get(int position) {
+            template<class T>
+            T* get(int position) const {
+                return dynamic_cast<T*>(get(position));
+            }
+
+            tag* get(int position) const {
                 return m_content.at(position);
             }
 

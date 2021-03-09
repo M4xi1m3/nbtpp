@@ -41,6 +41,11 @@ namespace nbtpp {
                 return false;
             }
 
+            template<class T>
+            T* get(std::string name) const {
+                return dynamic_cast<T*>(get(name));
+            }
+
             tag* get(std::string name) const {
                 for (auto i = m_content.begin(); i < m_content.end(); i++) {
                     if ((*i)->name() == name) {
